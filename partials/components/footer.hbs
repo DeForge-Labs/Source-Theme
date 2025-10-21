@@ -13,7 +13,7 @@
                 {{navigation type="secondary"}}
             </nav>
             <div class="gh-footer-copyright">
-                Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+                Open the <a href="https://deforge.io" target="_blank" rel="noopener">App</a>
             </div>
         </div>
 
@@ -29,6 +29,15 @@
                     {{> "email-subscription" email_field_id="footer-email"}}
                 </section>
             {{/unless}}
+        {{else}}
+            <section class="gh-footer-signup">
+                <h2 class="gh-footer-signup-header is-title">
+                    {{#if @custom.signup_heading}}{{@custom.signup_heading}}{{else}}{{@site.title}}{{/if}}
+                </h2>
+                <p class="gh-footer-signup-subhead is-body">
+                    {{#if @custom.signup_subheading}}{{@custom.signup_subheading}}{{else}}{{@site.description}}{{/if}}
+                </p>
+            </section>
         {{/if}}
 
     </div>

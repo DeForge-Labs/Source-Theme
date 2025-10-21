@@ -47,6 +47,11 @@ production stylesheet in assets/built/screen.css
 
 */
 
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+
 /* 1. Variables
 /* ---------------------------------------------------------- */
 
@@ -128,10 +133,6 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
 }
 
-sub, sup {
-    line-height: 1;
-}
-
 /* 4. Globals
 /* ---------------------------------------------------------- */
 
@@ -170,6 +171,7 @@ a:hover {
     background-color: var(--ghost-accent-color);
     border: 0;
     border-radius: 100px;
+    box-shadow: 0 10px 15px -2px rgb(135 84 255 / 1), 0 4px 6px -6px rgb(135 84 255 / 0.8);
 }
 
 .gh-button:hover {
@@ -2472,7 +2474,7 @@ figcaption {
 }
 
 figcaption a {
-    color: var(--ghost-accent-color);
+    color: #707070;
     text-decoration: underline;
 }
 
@@ -2762,7 +2764,9 @@ body[class*=" gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-hea
 .gh-footer-bar {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
+    /* justify-content: center; */
     align-items: center;
+    /* justify-content: space-between; */
     column-gap: 32px;
     margin-bottom: 100px;
     padding-block: 28px;
@@ -2771,7 +2775,6 @@ body[class*=" gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-hea
 }
 
 .gh-footer-logo {
-    position: relative;
     font-family: var(--gh-font-heading, var(--font-sans));
     font-size: calc(2.4rem * var(--factor, 1));
     font-weight: 725;

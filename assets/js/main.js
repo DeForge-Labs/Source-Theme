@@ -58,3 +58,62 @@
         wrapper.appendChild(table);
     });
 })();
+
+(function () {
+    window.addEventListener('load', () => {
+    let ghostPortal = document.getElementById('ghost-portal-root');
+    let ghostPortalWrapper = null;
+    let portalContentFinder = null;
+
+    // Renamed the function for clarity
+    const findAndModifyPortal = () => {
+      // Access the iframe's document
+      const iframeDoc = ghostPortalWrapper.firstChild.contentDocument;
+
+      // Check if the iframe's body content has loaded yet
+      if (!iframeDoc || !iframeDoc.body) {
+        return;
+      }
+      
+      const ghostPowered = iframeDoc.body.querySelector('.gh-portal-powered');
+      
+      // Once we find this element, we know the portal is ready to be modified
+      if (ghostPowered != null) {
+        // 1. Hide the "Powered by Ghost" link (original functionality)
+        ghostPowered.style.display = 'none';
+
+        // 2. Create a new <style> element to hold your CSS (new functionality)
+        // const style = iframeDoc.createElement('style');
+        // style.innerHTML = `
+        //   .gh-portal-btn-primary, .gh-portal-btn-link {
+        //     color: #000 !important;
+        //   }
+        // `;
+        // 3. Append the new styles to the iframe's <head>
+        // iframeDoc.head.appendChild(style);
+
+        // 4. Stop the interval now that our work is done
+        clearInterval(portalContentFinder);
+      }
+    }
+
+    let portalObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.addedNodes[0]?.nodeName === 'DIV') {
+          ghostPortalWrapper = mutation.addedNodes[0];
+          // Use the new function name
+          portalContentFinder = setInterval(findAndModifyPortal, 50);
+        }
+      });
+    });
+
+    portalObserver.observe(ghostPortal, {
+      attributes: false,
+      characterData: true,
+      childList: true,
+      subtree: true,
+      attributeOldValue: false,
+      characterDataOldValue: true
+    })
+  });
+})();
